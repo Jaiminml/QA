@@ -14,23 +14,16 @@
   <body>
     <div class="container">
       <div class="row-sm-5 row-sm-offset-1">
-            <form method='POST' name="QuestionForm" id="QuestionForm" action="/hye">
-              <label for="url-box">Enter Question</label>
-              <input type="text" name="question" class="form-control" id="url-box" placeholder="Enter a question" style="max-width: 300px;">
-              <br>
-              <button type="submit" class="btn btn-default ParaPhrase">Answer</button>
-            </form>
+        <form method='POST' name="QuestionForm" id="QuestionForm">
+          <label for="url-box">Enter Question</label>
+          <input type="text" name="question" class="form-control" id="url-box" placeholder="Enter a question" style="max-width: 300px;">
           <br>
+          <button type="submit" class="btn btn-default ParaPhrase">ParaPhrase</button>
+        </form>
+        <br>
       </div>
 
       <div class="row-sm-5 row-sm-offset-1 result get_paraphrases_pytorchlight">
-        {% if final_res %}
-          {% for i in final_res %}
-            {% for j in i %}
-              <h4>Answer = {{ j }}</h4>
-            {%endfor%}
-          {%endfor%}
-        {% endif %}
       </div>
 
 
@@ -42,6 +35,49 @@
     </div>
 
   <script>
+
+    var clicks = 0;
+    var int_clicks = 0;
+    var res = null
+
+    $(document).on("click", "#QuestionForm .ParaPhrase", function (postData){
+      var question = document.getElementById("url-box").value;
+      $.ajax({
+        data: {
+          question: $('#url-box').val(),
+        },
+        url: '/',
+        type: 'POST',
+        success: function(response) {
+          res = response;
+          for (i of response){
+            str= `<h4> Answer =  ${i[clicks]} </h4>`;
+            $('.get_paraphrases_pytorchlight').append(str);
+            break;
+          }
+        }
+      });
+      postData.preventDefault();
+    });
+
+    $(document).on("click", ".pager .result1", function (){
+      clicks += 1;
+      if ( clicks <= 35){
+        for (j of res[clicks]){
+          str1 = `<h4> Answer =  ${j} </h4>`;
+          $('.get_paraphrases_pytorchlight').append(str1);
+        }
+      }
+    });
+
+    $(document).on("click", ".pager .result", function (){
+      $('.get_paraphrases_pytorchlight').empty();
+      for (j of res[0]){
+        str1 = `<h4> Answer =  ${j} </h4>`;
+        $('.get_paraphrases_pytorchlight').append(str1);
+      }
+    });
+
 
   </script>
 
