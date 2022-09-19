@@ -68,7 +68,7 @@ def index2():
                 pass
 
 
-        return render_template("index.html",final_res=final_res)
+        return final_res
 
     return render_template("index.html")
 
