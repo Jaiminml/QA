@@ -43,14 +43,10 @@ def index2():
         form = request.form
         question = form['question']
         print(question,'question')
-        #Question = 'What is Ahmedabad?'
         api_key = "AIzaSyADiRertMWRLGyo5wpaAZ7lAJlt0Bu1G3Q"
         cse_id = "06ae4119a2a8e4b78"
-        # search_term = "what is ahmedabad?"
-        NUM_RESULTS = 35
+        NUM_RESULTS = 20
         result = google_search(question,api_key,cse_id,num=NUM_RESULTS)
-
-        res = result
         
         final_res = []
         
