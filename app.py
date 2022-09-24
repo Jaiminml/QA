@@ -37,7 +37,7 @@ def google_search(search_term, api_key, cse_id, **kwargs):
     return items_to_return 
 
 
-@app.route('/hye', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def index2():
     if request.method == 'POST':
         form = request.form
