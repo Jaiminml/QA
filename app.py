@@ -55,7 +55,7 @@ def index2():
                 r = requests.post(
                 url="https://hf.space/embed/jaimin/Open_Domain_QA/+/api/predict",
                 json={
-                    "data": [i['snippet'],question]},
+                    "data": [question,i['snippet']]},
                 )
                 response = r.json()
                 print(response,'response')
