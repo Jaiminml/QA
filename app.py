@@ -58,13 +58,24 @@ def index2():
                     "data": [question,i['snippet']]},
                 )
                 response = r.json()
-                print(response,'response')
                 final_res.append(response['data'])
             except:
                 pass
 
+        output = []
+        i = 0
+        for j in result:
+            snippet = j['snippet']
+            list = snippet.split(".")
+            for x in list:
+                if final_res[i][0] in x:
+                    output.append(x)
+                else:
+                    continue
 
-        return final_res
+            i = i + 1
+
+        return output
 
     return render_template("index.html")
 
